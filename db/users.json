@@ -1,0 +1,23 @@
+[
+    {
+        "id": "1",
+        "name": "Daniel",
+        "role": "Software Architect",
+        "jiraAdmin": true,
+        "added": "2017-10-15"
+    },
+    {
+        "id": "2",
+        "name": "Markus",
+        "role": "Frontend Engineer",
+        "jiraAdmin": false,
+        "added": "2018-09-01"
+    },
+    {
+        "id": "b9586a5a-c635-4d23-8fab-ff3034661dff",
+        "name": "Cas Guzdziol",
+        "role": "Front End Engineer",
+        "jiraAdmin": true,
+        "added": "2020-05-16T21:18:59.831Z"
+    }
+]
