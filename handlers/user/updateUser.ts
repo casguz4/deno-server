@@ -1,4 +1,4 @@
-import { updateUser } from "../services/users.ts";
+import { updateUser } from "../../services/users.ts";
 
 export default async (
   { params, request, response }: {
@@ -22,10 +22,10 @@ export default async (
   }
 
   const {
-    value: { name, role, jiraAdmin },
+    value: { name, role, isAdmin },
   } = await request.body();
 
-  await updateUser(userId, { name, role, jiraAdmin });
+  await updateUser(userId, { name, role, isAdmin });
 
   response.body = { msg: `User with id: ${userId} has been updated` };
 };

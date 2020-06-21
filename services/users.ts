@@ -2,7 +2,7 @@ import { fetchData, persistData } from "./db.ts";
 import { User } from "../models/user.ts";
 import createId from "../services/createId.ts";
 
-type UserData = Pick<User, "name" | "role" | "jiraAdmin">;
+type UserData = Pick<User, "name" | "role" | "isAdmin">;
 
 export const getUsers = async (): Promise<User[]> => {
   const users = await fetchData();
@@ -18,12 +18,12 @@ export const getUser = async (userId: string): Promise<User | undefined> => {
 
 export const createUser = async (userData: UserData): Promise<string> => {
   const users = await fetchData();
-
+  const userIds = users.map((user) => user.id);
   const newUser: User = {
-    id: createId(),
+    id: createId(userIds),
     name: String(userData.name),
     role: String(userData.role),
-    jiraAdmin: "jiraAdmin" in userData ? Boolean(userData.jiraAdmin) : false,
+    isAdmin: "isAdmin" in userData ? Boolean(userData.isAdmin) : false,
     added: new Date(),
   };
 
@@ -45,9 +45,9 @@ export const updateUser = async (
     ...user,
     name: userData.name !== undefined ? String(userData.name) : user.name,
     role: userData.role !== undefined ? String(userData.role) : user.role,
-    jiraAdmin: userData.jiraAdmin !== undefined
-      ? Boolean(userData.jiraAdmin)
-      : user.jiraAdmin,
+    jiraAdmin: userData.isAdmin !== undefined
+      ? Boolean(userData.isAdmin)
+      : user.isAdmin,
   };
 
   const users = await fetchData();

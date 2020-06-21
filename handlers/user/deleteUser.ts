@@ -1,4 +1,4 @@
-import { getUser } from "../services/users.ts";
+import { deleteUser, getUser } from "../../services/users.ts";
 
 export default async (
   { params, response }: { params: { id: string }; response: any },
@@ -7,9 +7,7 @@ export default async (
 
   if (!userId) {
     response.status = 400;
-    response.body = {
-      msg: "Invalid user id. Please try again",
-    };
+    response.body = { msg: "Invalid user id" };
     return;
   }
 
@@ -17,12 +15,11 @@ export default async (
 
   if (!foundUser) {
     response.status = 404;
-    response.body = {
-      msg: `User with ID ${userId} not found. Please try again`,
-    };
-
+    response.body = { msg: `User with ID ${userId} not found` };
     return;
   }
 
-  response.body = foundUser;
+  await deleteUser(userId);
+
+  response.body = { msg: `User with id: ${userId} has been deleted` };
 };

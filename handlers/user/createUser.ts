@@ -1,4 +1,4 @@
-import { createUser } from "../services/users.ts";
+import { createUser } from "../../services/users.ts";
 
 export default async (
   { request, response }: { request: any; response: any },
@@ -13,7 +13,7 @@ export default async (
   }
 
   const {
-    value: { name, role, jiraAdmin },
+    value: { name, role, isAdmin },
   } = await request.body();
 
   if (!name || !role) {
@@ -22,7 +22,7 @@ export default async (
     return;
   }
 
-  const userId = await createUser({ name, role, jiraAdmin });
+  const userId = await createUser({ name, role, isAdmin });
 
   response.body = { msg: `User created: ${userId}` };
 };
