@@ -1,5 +1,7 @@
 import { Application } from "https://deno.land/x/oak/mod.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
+import { Client } from "https://deno.land/x/mysql/mod.ts";
+
 import { APP_HOST, APP_PORT } from "./config.ts";
 
 import router from "./routing.ts";
